@@ -477,7 +477,7 @@ class TBGatewayService:
                         and self.tb_client.is_connected()):
                     summary_messages = self.__form_statistics()
                     # with self.__lock:
-                    self.tb_client.client.send_telemetry(summary_messages)
+                    self.tb_client.client.send_telemetry(summary_messages, quality_of_service=0)
                     gateway_statistic_send = time() * 1000
                     # self.__check_shared_attributes()
 

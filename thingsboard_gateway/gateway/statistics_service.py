@@ -79,12 +79,15 @@ class StatisticsService(Thread):
 
                     data_to_send[attribute['attributeOnGateway']] = value
 
-                self._gateway.tb_client.client.send_telemetry(data_to_send)
+                if data_to_send:
+                    self._gateway.tb_client.client.send_telemetry(data_to_send, quality_of_service=0)
 
                 if datetime.datetime.now() - self._last_streams_statistics_clear_time >= datetime.timedelta(days=1):
                     self.clear_streams_statistics()
 
-                self._gateway.tb_client.client.send_telemetry(StatisticsService.DATA_STREAMS_STATISTICS)
+                self._gateway.tb_client.client.send_telemetry(
+                    StatisticsService.DATA_STREAMS_STATISTICS,
+                    quality_of_service=0)
 
                 self._last_poll = time()
 
