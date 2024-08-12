@@ -143,4 +143,5 @@ class TbLogger(logging.Logger):
                 error_attr_name = self.attr_name
 
             self._gateway.tb_client.client.send_telemetry(
-                {error_attr_name: self.errors, 'ALL_ERRORS_COUNT': TbLogger.ALL_ERRORS_COUNT})
+                {error_attr_name: self.errors, 'ALL_ERRORS_COUNT': TbLogger.ALL_ERRORS_COUNT},
+                quality_of_service=0)

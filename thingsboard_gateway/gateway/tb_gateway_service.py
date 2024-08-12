@@ -1455,7 +1455,7 @@ class TBGatewayService:
                 'connectorName': content['connector'].get_name()
             }
             self.__added_devices[device_name] = {"device_details": device_details, "last_send_ts": monotonic()}
-            self.tb_client.client.gw_send_attributes(device_name, device_details)
+            self.tb_client.client.gw_send_attributes(device_name, device_details, quality_of_service=0)
 
     def update_device(self, device_name, event, content):
         should_save = False
