@@ -279,28 +279,28 @@ class TBClient(threading.Thread):
         self.__min_reconnect_delay = min_reconnect_delay
 
         keep_alive = self.__config.get("keep_alive", 120)
-        previous_connection_time = time()
-        try:
-            while not self.client.is_connected() and not self.__stopped:
-                if not self.__paused:
-                    if self.__stopped:
-                        break
-                    self.__logger.debug("connecting to ThingsBoard")
-                    try:
-                        if time() - previous_connection_time > min_reconnect_delay:
-                            self.client.connect(keepalive=keep_alive,
-                                                min_reconnect_delay=self.__min_reconnect_delay)
-                            previous_connection_time = time()
-                        else:
-                            sleep(1)
-                    except ConnectionRefusedError:
-                        self.__logger.error("Connection refused. Check ThingsBoard is running.")
-                    except Exception as e:
-                        self.__logger.exception(e)
-                sleep(1)
-        except Exception as e:
-            self.__logger.exception(e)
-            sleep(10)
+        self.client.connect(keepalive=keep_alive,
+                            min_reconnect_delay=self.__min_reconnect_delay)
+        # previous_connection_time = time()
+        # try:
+        #     while not self.client.is_connected() and not self.__stopped:
+        #         if not self.__paused:
+        #             if self.__stopped:
+        #                 break
+        #             self.__logger.debug("connecting to ThingsBoard")
+        #             try:
+        #                 if time() - previous_connection_time > min_reconnect_delay:
+        #                     previous_connection_time = time()
+        #                 else:
+        #                     sleep(1)
+        #             except ConnectionRefusedError:
+        #                 self.__logger.exception("Connection refused. Check ThingsBoard is running.")
+        #             except Exception as e:
+        #                 self.__logger.exception(e)
+        #         sleep(1)
+        # except Exception as e:
+        #     self.__logger.exception(e)
+        #     sleep(10)
 
     def run(self):
         while not self.__stopped:
