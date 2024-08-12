@@ -28,13 +28,13 @@ def init_logger(gateway, name, level, enable_remote_logging=False):
         from thingsboard_gateway.tb_utility.tb_handler import TBLoggerHandler
         remote_handler = TBLoggerHandler(gateway)
         log.addHandler(remote_handler)
-        log.setLevel(gateway.main_handler.level)
+        # log.setLevel(gateway.main_handler.level)
         remote_handler.add_logger(name)
         remote_handler.activate()
 
-    if hasattr(gateway, 'main_handler'):
-        log.addHandler(gateway.main_handler)
-        log.setLevel(gateway.main_handler.level)
+    # if hasattr(gateway, 'main_handler'):
+    #     log.addHandler(gateway.main_handler)
+    #     log.setLevel(gateway.main_handler.level)
 
     log_level_conf = level
     if log_level_conf:

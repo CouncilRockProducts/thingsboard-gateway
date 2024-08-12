@@ -54,12 +54,12 @@ class TBLoggerHandler(logging.Handler):
                         ]
         for logger in self.loggers:
             log = TbLogger(name=logger, gateway=gateway)
-            log.addHandler(self.__gateway.main_handler)
+            # log.addHandler(self.__gateway.main_handler)
             log.debug("Added remote handler to log %s", logger)
 
     def add_logger(self, name):
         log = TbLogger(name)
-        log.addHandler(self.__gateway.main_handler)
+        # log.addHandler(self.__gateway.main_handler)
         log.debug("Added remote handler to log %s", name)
 
     def _send_logs(self):

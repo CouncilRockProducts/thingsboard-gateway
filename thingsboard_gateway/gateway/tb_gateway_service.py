@@ -67,7 +67,7 @@ except ImportError:
     class TBGRPCServerManager:
         pass
 log: TbLogger = None  # type: ignore
-main_handler = logging.handlers.MemoryHandler(-1)
+# main_handler = logging.handlers.MemoryHandler(-1)
 
 DEFAULT_CONNECTORS = {
     "mqtt": "MqttConnector",
@@ -157,9 +157,9 @@ class TBGatewayService:
 
         global log
         log = TbLogger('service', gateway=self, level='INFO')
-        global main_handler
-        self.main_handler = main_handler
-        log.addHandler(self.main_handler)
+        # global main_handler
+        # self.main_handler = main_handler
+        # log.addHandler(self.main_handler)
 
         # load general configuration YAML/JSON
         self.__config = self.__load_general_config(config_file)
@@ -587,7 +587,7 @@ class TBGatewayService:
             log.info('Remote logging has being deactivated.')
         elif remote_logging_level is not None:
             if self.remote_handler.current_log_level != remote_logging_level or not self.remote_handler.activated:
-                self.main_handler.setLevel(remote_logging_level)
+                # self.main_handler.setLevel(remote_logging_level)
                 self.remote_handler.activate(remote_logging_level)
                 log.info('Remote logging has being updated. Current logging level is: %s ',
                          remote_logging_level)
