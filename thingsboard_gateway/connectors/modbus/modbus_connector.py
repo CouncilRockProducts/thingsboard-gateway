@@ -370,8 +370,8 @@ class ModbusConnector(Connector, Thread):
                             if self.__connect_to_current_master(device):
                                 if not device_connected and device.config['master'].is_socket_open():
                                     device_connected = True
-                                    self.__gateway.add_device(device.device_name, {CONNECTOR_PARAMETER: self},
-                                                          device_type=device.config.get(DEVICE_TYPE_PARAMETER))
+                                    # self.__gateway.add_device(device.device_name, {CONNECTOR_PARAMETER: self},
+                                    #                       device_type=device.config.get(DEVICE_TYPE_PARAMETER))
                                 else:
                                     device_disconnected = True
                             else:
