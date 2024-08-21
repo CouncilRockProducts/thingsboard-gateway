@@ -144,8 +144,8 @@ class BytesModbusUplinkConverter(ModbusConverter):
         decoded = None
 
         if lower_type in ['bit', 'bits']:
-            decoded = decoder_functions[type_]()
             decoded_lastbyte = decoder_functions[type_]()
+            decoded = decoder_functions[type_]()
             decoded += decoded_lastbyte
             if configuration.get('bit') is None:
                 decoded = decoded[len(decoded)-objects_count:]
